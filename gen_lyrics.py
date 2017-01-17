@@ -3,7 +3,14 @@ import sys
 import time
 
 import numpy as np
+
+#import logging
+#logging.getLogger("tensorflow").setLevel(logging.WARNING)
+
 import tensorflow as tf
+
+tf.logging.set_verbosity(tf.logging.ERROR)
+
 from tensorflow.contrib.tensorboard.plugins import projector
 from tensorflow.python.ops import rnn_cell, seq2seq
 
@@ -183,7 +190,7 @@ def sample(data, model, args):
         saver.restore(sess, ckpt)
 
         # initial phrase to warm RNN
-        prime = u'你要离开我知道很简单'
+        prime = u'嘿 那些仇戏你怎么办'
         state = sess.run(model.cell.zero_state(1, tf.float32))
 
         for word in prime[:-1]:
